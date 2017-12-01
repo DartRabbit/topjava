@@ -1,8 +1,6 @@
 package ru.javawebinar.topjava.web;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl;
+import ru.javawebinar.topjava.testrules.ExecutionTimeRule;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
@@ -30,6 +29,15 @@ public class InMemoryAdminRestControllerSpringTest {
     @Before
     public void setUp() throws Exception {
         repository.init();
+    }
+
+    @Rule
+    @ClassRule
+    public static ExecutionTimeRule executionTimeRule = new ExecutionTimeRule();
+
+    @AfterClass
+    public static void statsToLog() {
+        executionTimeRule.getStats();
     }
 
     @Test

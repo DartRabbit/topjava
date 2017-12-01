@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl;
+import ru.javawebinar.topjava.testrules.ExecutionTimeRule;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
@@ -35,6 +36,15 @@ public class InMemoryAdminRestControllerTest {
         // re-initialize
         InMemoryUserRepositoryImpl repository = appCtx.getBean(InMemoryUserRepositoryImpl.class);
         repository.init();
+    }
+
+    @Rule
+    @ClassRule
+    public static ExecutionTimeRule executionTimeRule = new ExecutionTimeRule();
+
+    @AfterClass
+    public static void statsToLog() {
+        executionTimeRule.getStats();
     }
 
     @Test
