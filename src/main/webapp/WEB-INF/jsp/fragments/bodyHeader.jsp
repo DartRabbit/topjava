@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<header><a href="${pageContext.request.contextPath}/"><spring:message code="app.home"/></a>
-
-    <a href="meals"><spring:message code="app.title"/></a></header>
+<fmt:setBundle basename="messages.app"/>
+<header><a href="${pageContext.request.contextPath}/"><fmt:message key="app.home"/></a>&nbsp;|&nbsp;<a
+        href="meals"><fmt:message key="app.title"/></a></header>
