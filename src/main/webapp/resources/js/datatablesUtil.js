@@ -32,10 +32,30 @@ function deleteRow(id) {
     });
 }
 
+function filter() {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "filter",
+        data: $('#filter').serialize(),
+        success: function (data) {
+            datatableApi.clear().rows.add(data).draw();
+        }
+    })
+}
+
+// function updateTableWithData(data) {
+//     datatableApi.clear().rows.add(data).draw();
+// }
+
 function updateTable() {
     $.get(ajaxUrl, function (data) {
         datatableApi.clear().rows.add(data).draw();
     });
+}
+
+function clearFilter() {
+    $("#filter")[0].reset();
+    updateTable();
 }
 
 function save() {
